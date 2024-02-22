@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.svg"
 import Container from "../../components/container";
 import Input from "../../components/input";
 import { useForm } from "react-hook-form"
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { auth } from "../../services/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const schema = z.object({
     email: z.string().email("Insira um email válido").min(1, "O campo email é obrigatório"),
@@ -15,14 +17,23 @@ type FormData =z.infer<typeof schema>
 
 
 const Login = () => {
-
+    const navigate = useNavigate()
     const {register, handleSubmit, formState: { errors }} = useForm<FormData>({
         resolver: zodResolver(schema),
         mode: 'onChange'
     })
 
     const onSubmit = (data: FormData) => {
-        console.log(data)
+        signInWithEmailAndPassword(auth, data.email, data.password)
+        .then((user) => {
+            console.log('USUARIO LOGADO!')
+            console.log(user)
+            navigate("/", { replace: true })
+        })
+        .catch(error => {
+            console.log('ERROR AO LOGAR!')
+            console.log(error)
+        })
     }
 
     return ( 
