@@ -33,31 +33,31 @@ const Login = () => {
                     <img src={logo} alt="logo" className="w-full"/>
                 </Link>
 
-                <form action="" className="bg-white max-w-xl w-full rounded-full" onSubmit={handleSubmit(onSubmit)}>
+                <form action="" className="bg-white max-w-xl w-full rounded-lg p-4" onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="mb-3">
                         <Input 
-                        type="email" 
-                        placeholder="Digite seu email" 
-                        name="email" 
-                        error={errors.email?.message} 
-                        register={register} 
+                            type="email" 
+                            placeholder="Digite seu email" 
+                            name="email" 
+                            error={errors.email?.message} 
+                            register={register} 
                         />
                     </div>
 
                     <div className="mb-3">
                         <Input 
-                        type="password" 
-                        placeholder="Digite sua senha" 
-                        name="password"  
-                        error={errors.password?.message} 
-                        register={register} 
+                            type="password" 
+                            placeholder="Digite sua senha" 
+                            name="password"  
+                            error={errors.password?.message} 
+                            register={register} 
                         />
                     </div>
 
                     
 
-                    <button>Acessar</button>
+                    <button type="submit" className="bg-zinc-900 w-full rounded-full text-white h-10 font-medium">Acessar</button>
                 </form>
             </div>
         </Container>
@@ -66,3 +66,7 @@ const Login = () => {
 }
  
 export default Login;
+
+
+
+
