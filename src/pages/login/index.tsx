@@ -59,6 +59,11 @@ const Login = () => {
 
                     <button type="submit" className="bg-zinc-900 w-full rounded-full text-white h-10 font-medium">Acessar</button>
                 </form>
+
+                <Link to="/register" >
+                    <p>Ainda não tem uma conta? Crie já!</p>
+                </Link>
+
             </div>
         </Container>
 
