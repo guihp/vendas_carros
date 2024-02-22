@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.svg"
 import Container from "../../components/container";
@@ -6,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { auth } from "../../services/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 const schema = z.object({
     email: z.string().email("Insira um email válido").min(1, "O campo email é obrigatório"),
@@ -22,6 +23,14 @@ const Login = () => {
         resolver: zodResolver(schema),
         mode: 'onChange'
     })
+
+    useEffect(() => {
+        const handleLogout = async () => {
+            await signOut(auth)
+        }
+
+        handleLogout()
+    }, [])
 
     const onSubmit = (data: FormData) => {
         signInWithEmailAndPassword(auth, data.email, data.password)

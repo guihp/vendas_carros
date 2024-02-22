@@ -6,7 +6,8 @@ import { useForm } from "react-hook-form"
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { auth } from "../../services/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { useEffect } from "react";
 
 
 const schema = z.object({
@@ -24,6 +25,14 @@ const Register = () => {
         resolver: zodResolver(schema),
         mode: 'onChange'
     })
+
+    useEffect(() => {
+        const handleLogout = async () => {
+            await signOut(auth)
+        }
+
+        handleLogout()
+    }, [])
 
      const  onSubmit = async (data: FormData) => {
         createUserWithEmailAndPassword(auth, data.email, data.password)
