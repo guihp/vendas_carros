@@ -24,7 +24,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
     const [user, setUser] = useState<UserProps | null>(null);
     const [loadingAuth, setLoadingAuth] = useState(true)
+
+
     useEffect(() => {
+        
         const olheiro = onAuthStateChanged(auth, (user) => {
             if(user) {
                 setUser({

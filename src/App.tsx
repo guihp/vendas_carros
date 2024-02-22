@@ -6,8 +6,9 @@ import Login from "./pages/login"
 import Register from "./pages/register"
 import NovoCarro from "./pages/dashboard/novo"
 import Detalhes from "./pages/carros"
-
 import { Layout } from "./components/layout"
+import { Private } from "./routes/Private"
+
 
 const router = createBrowserRouter([
   {
@@ -23,11 +24,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <Dashboard />
+        element: <Private> <Dashboard /> </Private>  
       },
       {
         path: '/dashboard/novo',
-        element: <NovoCarro/>
+        element:  <Private> <NovoCarro/> </Private>
       }
     ]
   },
