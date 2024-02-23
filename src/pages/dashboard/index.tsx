@@ -1,11 +1,11 @@
+import Container from "../../components/container";
+import HeaderDashboard from "../../components/painel";
 const Dashboard = () => {
     return ( 
 
-        <>
-            <h1>
-                Dashborad
-            </h1>
-        </>
+        <Container>
+            <HeaderDashboard />
+        </Container>
 
      );
 }

@@ -5,7 +5,7 @@ const Home = () => {
     return ( 
         <Container>
             <section className="bg-white p-4 rounded-full w-full max-w-3xl mx-auto flex justify-center items-center gap-2">
-                <input type="text" placeholder="Digiteo nome do carro " className="w-full border-2 rounded-full h-9 px-3 outline-none"/>
+                <input type="text" placeholder="Digite o nome do carro " className="w-full border-2 rounded-full h-9 px-3 outline-none"/>
                 <button aria-label="Buscar" className="bg-red-500 h-9 px-8 rounded-full text-white font-medium">
                     <IoSearch  size={24} color='#fff'/>
                 </button>
