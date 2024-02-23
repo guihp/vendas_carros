@@ -17,7 +17,7 @@ const HeaderDashboard = () => {
             </Link>
             
             <Link to='/dashboard/novo' >
-                novo carro
+                Novo carro
             </Link>
 
             <button className="ml-auto" onClick={handleLogout}>
