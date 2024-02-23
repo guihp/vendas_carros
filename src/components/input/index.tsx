@@ -15,7 +15,7 @@ const Input = ({ type, placeholder, name, register, error, rules }: InputProps) 
     return ( 
         <div>
             <input 
-            className="w-full border-2 rounded-full h-11 px-3"
+            className="w-full border-2 rounded-lg h-11 px-3"
             placeholder={placeholder} 
             type={type} 
             {...register(name, rules)}
