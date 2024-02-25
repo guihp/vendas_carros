@@ -43,14 +43,10 @@ interface ImageItemProps {
 
 const NovoCarro = () => {
     const { user, } = useContext(AuthContext)
-    const { user, } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
         resolver: zodResolver(schema),
         mode: 'onChange'
     })
-
-    const [carImages, setCarImages] = useState<ImageItemProps[]>([])
-
     const [carImages, setCarImages] = useState<ImageItemProps[]>([])
 
     const onSubmit = (data :FormData) => { 
