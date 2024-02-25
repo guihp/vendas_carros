@@ -34,12 +34,22 @@ interface ImageItemProps {
     url: string;
 }
 
+interface ImageItemProps {
+    uid: string;
+    name: string;
+    previewUrl: string;
+    url: string;
+}
+
 const NovoCarro = () => {
+    const { user, } = useContext(AuthContext)
     const { user, } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
         resolver: zodResolver(schema),
         mode: 'onChange'
     })
+
+    const [carImages, setCarImages] = useState<ImageItemProps[]>([])
 
     const [carImages, setCarImages] = useState<ImageItemProps[]>([])
 
@@ -143,8 +153,18 @@ const NovoCarro = () => {
                     </div>
                     <div className="cursor-pointer">
                         <input type="file" accept="image/*" className="opacity-0 cursor-pointer" onChange={handleFile}/>
+                        <input type="file" accept="image/*" className="opacity-0 cursor-pointer" onChange={handleFile}/>
                     </div>
                 </button>
+
+                {carImages.map( item => (
+                    <div key={item.name} className="w-full h-32 flex items-center justify-center relative">
+                        <button className="absolute" onClick={() => handleDeleteImage(item)}>
+                            <FiTrash size={28} color="red" /> 
+                        </button>
+                        <img src={item.previewUrl} alt="foto de um carro" className="rounded-lg w-full h-32 object-cover" />
+                    </div>
+                ))}
 
                 {carImages.map( item => (
                     <div key={item.name} className="w-full h-32 flex items-center justify-center relative">
