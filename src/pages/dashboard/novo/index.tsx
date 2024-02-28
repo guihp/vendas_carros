@@ -12,6 +12,7 @@ import { v4 as uuidV4 } from 'uuid'
 import { storage, db } from "../../../services/firebase";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import { addDoc, collection } from "firebase/firestore";
+
 const schema = z.object({
     name: z.string().min(1, 'O campo nome é obrigatório'),
     model: z.string().min(1, 'O Modelo do carroé obrigatório'),
@@ -152,15 +153,6 @@ const NovoCarro = () => {
                         <input type="file" accept="image/*" className="opacity-0 cursor-pointer" onChange={handleFile}/>
                     </div>
                 </button>
-
-                {carImages.map( item => (
-                    <div key={item.name} className="w-full h-32 flex items-center justify-center relative">
-                        <button className="absolute" onClick={() => handleDeleteImage(item)}>
-                            <FiTrash size={28} color="red" /> 
-                        </button>
-                        <img src={item.previewUrl} alt="foto de um carro" className="rounded-lg w-full h-32 object-cover" />
-                    </div>
-                ))}
 
                 {carImages.map( item => (
                     <div key={item.name} className="w-full h-32 flex items-center justify-center relative">
