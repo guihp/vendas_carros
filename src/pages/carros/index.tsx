@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Container from "../../components/container";
 import { FaWhatsapp } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getDoc, doc, } from "firebase/firestore";
 import { db } from "../../services/firebase";
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -33,7 +33,7 @@ const Detalhes = () => {
     const [car, setCar] = useState<CarsProps>()
     const { id } = useParams() 
     const [slider, setSlider] = useState<number>(2)
-
+    const navigate = useNavigate();
     useEffect(() => {
         async function load(){
             if(!id){
@@ -43,6 +43,11 @@ const Detalhes = () => {
             const docRef = doc(db, 'cars', id)
             getDoc(docRef)
             .then((snaps) => {
+
+                if(!snaps.data()){
+                    navigate("/")
+                }
+
                 setCar({
                     id: snaps.id,
                     name: snaps.data()?.name,
@@ -90,18 +95,20 @@ const Detalhes = () => {
 
         <Container>
 
-            <Swiper 
-                slidesPerView={slider}
-                pagination={{ clickable: true }}
-                navigation
-            >
-                {car?.images.map( cadaimage => (
-                    <SwiperSlide key={cadaimage.name}>
-                        <img src={cadaimage.url} alt="imagem de carro" className="w-full h-96 object-cover"/>
-                    </SwiperSlide>
-                ))}
+            { car && (
+                <Swiper 
+                    slidesPerView={slider}
+                    pagination={{ clickable: true }}
+                    navigation
+                    >
+                    {car?.images.map( cadaimage => (
+                        <SwiperSlide key={cadaimage.name}>
+                            <img src={cadaimage.url} alt="imagem de carro" className="w-full h-96 object-cover"/>
+                        </SwiperSlide>
+                    ))}
 
-            </Swiper>
+                </Swiper>
+            )}
 
             { car && (
                 <div className="w-full bg-white rounded-lg p-6 my-4">
@@ -155,7 +162,7 @@ const Detalhes = () => {
                         {car?.whatsaap}
                     </p>
 
-                    <a href="#" className="bg-green-500 w-full text-white flex rounded-lg items-center justify-center gap-2 my-6 h-11 text-xl font-medium cursor-pointer">
+                    <a href={`https://api.whatsaap.com/send?phone=${car?.whatsaap}&text=Olá vi esse ${car?.name} no site blabla e gostaria de saber mais!`} target="_blank" className="bg-green-500 w-full text-white flex rounded-lg items-center justify-center gap-2 my-6 h-11 text-xl font-medium cursor-pointer">
                         Conversar com o vendedor 
                         <FaWhatsapp size={24} color="#fff"/>
                     </a>
